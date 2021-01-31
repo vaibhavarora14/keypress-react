@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { KeyboardShortcutsProvider } from './library/index';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <KeyboardShortcutsProvider>
+      <App />
+    </KeyboardShortcutsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
