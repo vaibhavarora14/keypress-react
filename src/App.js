@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import './App.css';
 import A from './components/A';
 import B from './components/B';
