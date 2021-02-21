@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import KeyboardShortcut from '../library/index';
 
 const BLUE = '#16cbe8';
@@ -7,12 +7,9 @@ const RED = '#da6161';
 function B() {
   const [bgColor, setBgColor] = useState(BLUE);
 
-  const toggleBGColor = useCallback(
-    () => {
-      setBgColor(current => current === BLUE ? RED : BLUE)
-    },
-    [],
-  )
+  const toggleBGColor = () => {
+    setBgColor(current => current === BLUE ? RED : BLUE)
+  };
 
   return (
     <div style={{ display: 'flex' }}>

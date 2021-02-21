@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef, useCallback } from 'react';
 import { Listener } from 'keypress.js'
 import { Context, KeyboardShortcutsProvider } from './state';
 
@@ -6,9 +6,24 @@ const listener = new Listener();
 
 function KeybordShortcut({ combo, callback, description }) {
   const { setCombos } = useContext(Context);
+  const ref = useRef(null);
+
+  const myCallback = useCallback(
+    () => {
+      if (ref.current) {
+        ref.current();
+      }
+    },
+    [],
+  )
 
   useEffect(() => {
-    const object = listener.simple_combo(combo, callback);
+    ref.current = callback;
+  }, [callback])
+
+  useEffect(() => {
+    const object = listener.simple_combo(combo, myCallback);
+
 
     const comboObject = { combo, description, object }
     setCombos((combos) => [
@@ -23,7 +38,7 @@ function KeybordShortcut({ combo, callback, description }) {
       );
       listener.unregister_combo(object);
     }
-  }, [callback, combo, description, setCombos])
+  }, [combo, description, myCallback, setCombos])
 
 
   return null;
